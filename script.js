@@ -1,3 +1,44 @@
+const btns = document.querySelectorAll(".option");
+const gameStatus = document.querySelector(".status");
+const playerScoreEl = document.querySelector(".player-scoreEl");
+const computerScoreEl = document.querySelector(".computer-scoreEl");
+const currentRoundEl = document.querySelector(".current-round");
+const playerChoice = document.querySelector(".player-choice");
+const computerChoice = document.querySelector(".computer-choice");
+
+const sign = {
+  rock: "🤜",
+  paper: "🫳",
+  scissor: "✌️",
+};
+
+let computerScore = 0;
+let playerScore = 0;
+let currentRound = 1;
+
+btns.forEach((btn) =>
+  btn.addEventListener("click", function () {
+    const gameInfo = playRound(this.dataset.value, getComputerChoice());
+    console.log(gameInfo);
+    gameStatus.textContent = gameInfo;
+    playerScoreEl.textContent = playerScore;
+    computerScoreEl.textContent = computerScore;
+    currentRoundEl.textContent = currentRound;
+
+    if (currentRound === 5) {
+      if (computerScore === playerScore) {
+        gameStatus.textContent = "It's a Draw";
+      }
+      if (computerScore > playerScore) {
+        gameStatus.textContent = "Computer Won";
+      } else if (computerScore < playerScore) {
+        gameStatus.textContent = "You won";
+      }
+    }
+    currentRound++;
+  })
+);
+
 function getComputerChoice() {
   const rand = Math.floor(Math.random() * 3 + 1);
   switch (rand) {
@@ -10,10 +51,9 @@ function getComputerChoice() {
   }
 }
 
-let computerScore = 0;
-let playerScore = 0;
-
 function playRound(playerSelection, computerSelection) {
+  playerChoice.textContent = sign[`${playerSelection}`];
+  computerChoice.textContent = sign[`${computerSelection}`];
   if (playerSelection === computerSelection) {
     computerScore++;
     playerScore++;
@@ -39,22 +79,8 @@ function playRound(playerSelection, computerSelection) {
     computerScore++;
     return "You Lose! Rock beats Scissor";
   }
-  if (playerSelection === "scrissor" && computerSelection === "paper") {
+  if (playerSelection === "scissor" && computerSelection === "paper") {
     playerScore++;
     return "You Win! Pcissor beats Paper";
   }
-}
-
-for (let index = 0; index < 5; index++) {
-  const playerSelection = prompt("Enter Rock, Paper or Scissor").toLowerCase();
-  console.log(playRound(playerSelection, getComputerChoice()));
-}
-
-if (computerScore === playerScore) {
-  console.log("It's a Draw");
-}
-if (computerScore > playerScore) {
-  console.log("Computer Won");
-} else if (computerScore < playerScore) {
-  console.log("You won");
 }

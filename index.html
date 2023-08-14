@@ -5,6 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script defer src="./script.js"></script>
     <title>Document</title>
+    <style>
+      h1,
+      p,
+      .status {
+        text-align: center;
+        color: #888;
+        margin-top: 50px;
+      }
+      p,
+      .status {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+      }
+      .info,
+      .result {
+        display: flex;
+        justify-content: space-around;
+      }
+      .result {
+        margin-top: 100px;
+      }
+      .result div {
+        font-size: 100px;
+      }
+      .options {
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        gap: 50px;
+      }
+      .option {
+        /* width: 30%; */
+        width: fit-content;
+        /* border: 2px solid black; */
+        font-size: 100px;
+        display: flex;
+        justify-content: center;
+        transition: 0.4s;
+        box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+      }
+      .option:hover {
+        scale: 1.1;
+        cursor: pointer;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <h1>Rock / Paper / Scissor</h1>
+    <div class="info">
+      <p>You: <span class="player-scoreEl">0</span></p>
+      <p>Round: <span class="current-round">1</span>/5</p>
+      <p>Computer: <span class="computer-scoreEl">0</span></p>
+    </div>
+    <div class="result">
+      <div class="player-choice">🤜</div>
+      <div>VS</div>
+      <div class="computer-choice">✌️</div>
+    </div>
+    <div class="status">Let's do this</div>
+    <div class="options">
+      <div data-value="rock" class="option">🤜</div>
+      <div data-value="paper" class="option">🫳</div>
+      <div data-value="scissor" class="option">✌️</div>
+    </div>
+  </body>
 </html>
