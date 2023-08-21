@@ -5,6 +5,7 @@ const computerScoreEl = document.querySelector(".computer-scoreEl");
 const currentRoundEl = document.querySelector(".current-round");
 const playerChoice = document.querySelector(".player-choice");
 const computerChoice = document.querySelector(".computer-choice");
+const restartBtn = document.querySelector(".btn-restart");
 
 const sign = {
   rock: "🤜",
@@ -18,6 +19,7 @@ let currentRound = 1;
 
 btns.forEach((btn) =>
   btn.addEventListener("click", function () {
+    if (currentRound > 5) return restartGame();
     const gameInfo = playRound(this.dataset.value, getComputerChoice());
     console.log(gameInfo);
     gameStatus.textContent = gameInfo;
@@ -25,7 +27,7 @@ btns.forEach((btn) =>
     computerScoreEl.textContent = computerScore;
     currentRoundEl.textContent = currentRound;
 
-    if (currentRound === 5) {
+    if (currentRound >= 5) {
       if (computerScore === playerScore) {
         gameStatus.textContent = "It's a Draw";
       }
@@ -34,6 +36,7 @@ btns.forEach((btn) =>
       } else if (computerScore < playerScore) {
         gameStatus.textContent = "You won";
       }
+      restartGame();
     }
     currentRound++;
   })
@@ -83,4 +86,11 @@ function playRound(playerSelection, computerSelection) {
     playerScore++;
     return "You Win! Pcissor beats Paper";
   }
+}
+
+function restartGame() {
+  restartBtn.classList.remove("hidden");
+  restartBtn.addEventListener("click", () => {
+    location.reload();
+  });
 }
